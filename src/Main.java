@@ -1,14 +1,52 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
 
 
     public static void main(String[] args) {
 
-        System.out.println("hey");
+        String num1;
+        String num2;
+        LinkedList<ListNode> nums = new LinkedList<>();
+        ListNode node5 = new ListNode(9);
+        ListNode node4 = new ListNode(2, node5);
+        ListNode node3 = new ListNode(6, node4);
+        ListNode node2 = new ListNode(4, node3);
+        ListNode node1 = new ListNode(1, node2);
+
+        nums.add(node1);
+        System.out.println(nums.size());
+        nums.removeLast();
+        System.out.println(nums.size());
+    }
+    public String getString(ListNode node){
+        ListNode head = new ListNode()node.val;
+        while (node.next != null) {
+            getString(node.next);
+        }
+
 
     }
+
+
+
+    //Definition for singly-linked list.
+    static class ListNode {
+          int val;
+          ListNode next;
+          ListNode() {}
+          ListNode(int val) { this.val = val; }
+          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      }
+
+//    static class Solution {
+//        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//
+//        }
+//    }
 }
 
 //    public static int romanToInt(String s) {
