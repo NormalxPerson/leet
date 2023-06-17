@@ -1,39 +1,49 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Main {
 
 
     public static void main(String[] args) {
 
-        String num1;
-        String num2;
-        LinkedList<ListNode> nums = new LinkedList<>();
+        ListNode head1 = new ListNode();
+        ListNode head2 = new ListNode();
         ListNode node5 = new ListNode(9);
         ListNode node4 = new ListNode(2, node5);
         ListNode node3 = new ListNode(6, node4);
         ListNode node2 = new ListNode(4, node3);
         ListNode node1 = new ListNode(1, node2);
 
-        nums.add(node1);
-        System.out.println(nums.size());
-        nums.removeLast();
-        System.out.println(nums.size());
+
+        System.out.println(addNodes(node1));
     }
-    public String getString(ListNode node){
-        ListNode head = new ListNode()node.val;
-        while (node.next != null) {
-            getString(node.next);
+
+//    static int iterateLinkedList(ListNode head) {
+//        int allsum = addNodes(sum, head);
+//        return allsum;
+//    }
+    static int addNodes(ListNode head) {
+        if (head == null) {
+            return 0;
+        }
+        else {
+            return head.val + addNodes(head.next);
         }
 
-
     }
 
 
 
-    //Definition for singly-linked list.
+
+//    public String getString(ListNode node){
+//        ListNode head = new ListNode()node.val;
+//        while (node.next != null) {
+//            getString(node.next);
+//        }
+//
+//
+//    }
+
+
+
+    //Definition for singly-linked list.0
     static class ListNode {
           int val;
           ListNode next;
