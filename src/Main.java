@@ -12,21 +12,15 @@ public class Main {
         ListNode node1 = new ListNode(1, node2);
 
 
-        System.out.println(addNodes(node1));
+        System.out.println(reverseList(node1, null).val);
     }
 
-//    static int iterateLinkedList(ListNode head) {
-//        int allsum = addNodes(sum, head);
-//        return allsum;
-//    }
-    static int addNodes(ListNode head) {
-        if (head == null) {
-            return 0;
-        }
-        else {
-            return head.val + addNodes(head.next);
-        }
 
+    public static ListNode reverseList(ListNode head, ListNode prev ) {
+        if (head == null) { return prev; }
+        ListNode next = head.next;
+        head.next = prev;
+        return reverseList(next, head);
     }
 
 
