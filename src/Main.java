@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Main {
 
 
@@ -11,8 +13,8 @@ public class Main {
         ListNode node2 = new ListNode(4, node3);
         ListNode node1 = new ListNode(1, node2);
 
-
-        System.out.println(reverseList(node1, null).val);
+        head1 = reverseList(node1, null);
+        int list1Num = stringToInt(nodeToString(head1));
     }
 
 
@@ -21,9 +23,28 @@ public class Main {
         ListNode next = head.next;
         head.next = prev;
         return reverseList(next, head);
+
+    }
+    public static String nodeToString(ListNode head) {
+        String numbers = "";
+        while (head != null) {
+            numbers += Integer.toString(head.val);
+            head = head.next;
+        }
+        return numbers;
     }
 
+    public static int stringToInt(String numberString) {
+        int num = Integer.parseInt(numberString);
+        return num;
+    }
 
+    public static ListNode createListOfNodes(int[] intList) {
+        ListNode
+        for (int number : intList) {
+
+        }
+    }
 
 
 //    public String getString(ListNode node){
