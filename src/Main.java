@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -5,18 +7,34 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ListNode head1 = new ListNode();
-        ListNode head2 = new ListNode();
+
         ListNode node5 = new ListNode(9);
         ListNode node4 = new ListNode(2, node5);
         ListNode node3 = new ListNode(6, node4);
         ListNode node2 = new ListNode(4, node3);
         ListNode node1 = new ListNode(1, node2);
 
-        head1 = reverseList(node1, null);
-        int list1Num = stringToInt(nodeToString(head1));
+        ListNode node5a = new ListNode(2);
+        ListNode node4a = new ListNode(6, node5a);
+        ListNode node3a = new ListNode(4, node4a);
+        ListNode node2a = new ListNode(4, node3a);
+        ListNode node1a = new ListNode(2, node2a);
+
+        ListNode answer = calculations(node1, node1a);
+        System.out.println(answer.val);
+        System.out.println(answer.next.val);
     }
 
+
+    public static ListNode calculations(ListNode l1, ListNode l2) {
+       ListNode newL1 = reverseList(l1, null);
+       ListNode newL2 = reverseList(l2, null);
+       long answer = nodeToNumber(newL1) + nodeToNumber(newL2);
+       ArrayList<ListNode> newList = numberToListNode(answer);
+       ListNode newHead = reverseList(newList.get(0), null);
+       return newHead;
+
+    }
 
     public static ListNode reverseList(ListNode head, ListNode prev ) {
         if (head == null) { return prev; }
@@ -25,26 +43,38 @@ public class Main {
         return reverseList(next, head);
 
     }
-    public static String nodeToString(ListNode head) {
+    public static long nodeToNumber(ListNode head) {
         String numbers = "";
         while (head != null) {
             numbers += Integer.toString(head.val);
             head = head.next;
         }
-        return numbers;
+        long number = Long.parseLong(numbers);
+        return number;
     }
 
-    public static int stringToInt(String numberString) {
-        int num = Integer.parseInt(numberString);
-        return num;
-    }
-
-    public static ListNode createListOfNodes(int[] intList) {
-        ListNode
-        for (int number : intList) {
-
+    public static ArrayList<ListNode> numberToListNode(long number) {
+        String num = Long.toString(number);
+        ArrayList<ListNode> listOfNodes = new ArrayList<>();
+        for (int i = 0; i < num.length(); i++){
+            ListNode node = new ListNode(num.charAt(i)-'0');
+            listOfNodes.add(node);
         }
+        for (int i = 0; i < listOfNodes.size(); i++){
+            if (i == listOfNodes.size()-1) {
+                listOfNodes.get(i).next = null;
+                break;
+            }
+            listOfNodes.get(i).next=listOfNodes.get(i+1);
+        }
+        return listOfNodes;
     }
+
+//    public static ListNode numberToListNode(String numberString){
+//
+//    }
+
+
 
 
 //    public String getString(ListNode node){
