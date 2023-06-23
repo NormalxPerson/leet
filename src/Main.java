@@ -32,25 +32,32 @@ public class Main {
     public static int lengthOfSubstring(String s) {
         int count=0;
         int largest=0;
+        int i=0;
         ArrayList<Character> charList = new ArrayList<>();
         if (s.length() == 0 ) { return 0; }
         if (s.charAt(0) == ' ' || s.length() == 1) { return 1; }
-        for (int i = 0; i < s.length(); i++ ){
-            if (!charList.contains(s.charAt(i))) {
-                count++;
-                char c = s.charAt(i);
-                charList.add(c);
-            } else {
-                if (count>largest) { largest = count; }
-                charList.clear();
-                charList.add(s.charAt(i));
-                i = count - i;
-                count = 1;
-            }
-        }
-        if (count > largest) {largest = count; }
-        return largest;
+        while (i < s.length() ){
+            for (int j = 0; j < s.length(); j++) {
+                if (!charList.contains(s.charAt(j))) {
+                    count++;
+                    char c = s.charAt(j);
+                    charList.add(c);
 
+                } else {
+                    if (count>largest) { largest = count; }
+                    charList.clear();
+                    i++;
+                    j = i;
+
+                    count = 0;
+                }
+            }
+            if (count > largest) { largest = count; }
+            return largest;
+
+        }
+
+        return largest;
     }
 
 
