@@ -7,68 +7,99 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String s = "dvdf";
 
-        ListNode node5 = new ListNode(9);
-        ListNode node4 = new ListNode(2, node5);
-        ListNode node3 = new ListNode(6, node4);
-        ListNode node2 = new ListNode(4, node3);
-        ListNode node1 = new ListNode(1, node2);
+        System.out.println(lengthOfSubstring(s));
 
-        ListNode node5a = new ListNode(2);
-        ListNode node4a = new ListNode(6, node5a);
-        ListNode node3a = new ListNode(4, node4a);
-        ListNode node2a = new ListNode(4, node3a);
-        ListNode node1a = new ListNode(2, node2a);
 
-        ListNode answer = calculations(node1, node1a);
-        System.out.println(answer.val);
-        System.out.println(answer.next.val);
+//        ListNode node5 = new ListNode(9);
+//        ListNode node4 = new ListNode(2, node5);
+//        ListNode node3 = new ListNode(6, node4);
+//        ListNode node2 = new ListNode(4, node3);
+//        ListNode node1 = new ListNode(1, node2);
+//
+//        ListNode node5a = new ListNode(2);
+//        ListNode node4a = new ListNode(6, node5a);
+//        ListNode node3a = new ListNode(4, node4a);
+//        ListNode node2a = new ListNode(4, node3a);
+//        ListNode node1a = new ListNode(2, node2a);
+//
+//        ListNode answer = calculations(node1, node1a);
+//        System.out.println(answer.val);
+//        System.out.println(answer.next.val);
     }
 
-
-    public static ListNode calculations(ListNode l1, ListNode l2) {
-       ListNode newL1 = reverseList(l1, null);
-       ListNode newL2 = reverseList(l2, null);
-       long answer = nodeToNumber(newL1) + nodeToNumber(newL2);
-       ArrayList<ListNode> newList = numberToListNode(answer);
-       ListNode newHead = reverseList(newList.get(0), null);
-       return newHead;
-
-    }
-
-    public static ListNode reverseList(ListNode head, ListNode prev ) {
-        if (head == null) { return prev; }
-        ListNode next = head.next;
-        head.next = prev;
-        return reverseList(next, head);
-
-    }
-    public static long nodeToNumber(ListNode head) {
-        String numbers = "";
-        while (head != null) {
-            numbers += Integer.toString(head.val);
-            head = head.next;
-        }
-        long number = Long.parseLong(numbers);
-        return number;
-    }
-
-    public static ArrayList<ListNode> numberToListNode(long number) {
-        String num = Long.toString(number);
-        ArrayList<ListNode> listOfNodes = new ArrayList<>();
-        for (int i = 0; i < num.length(); i++){
-            ListNode node = new ListNode(num.charAt(i)-'0');
-            listOfNodes.add(node);
-        }
-        for (int i = 0; i < listOfNodes.size(); i++){
-            if (i == listOfNodes.size()-1) {
-                listOfNodes.get(i).next = null;
-                break;
+    public static int lengthOfSubstring(String s) {
+        int count=0;
+        int largest=0;
+        ArrayList<Character> charList = new ArrayList<>();
+        if (s.length() == 0 ) { return 0; }
+        if (s.charAt(0) == ' ' || s.length() == 1) { return 1; }
+        for (int i = 0; i < s.length(); i++ ){
+            if (!charList.contains(s.charAt(i))) {
+                count++;
+                char c = s.charAt(i);
+                charList.add(c);
+            } else {
+                if (count>largest) { largest = count; }
+                charList.clear();
+                charList.add(s.charAt(i));
+                i = count - i;
+                count = 1;
             }
-            listOfNodes.get(i).next=listOfNodes.get(i+1);
         }
-        return listOfNodes;
+        if (count > largest) {largest = count; }
+        return largest;
+
     }
+
+
+}
+
+
+//    public static ListNode calculations(ListNode l1, ListNode l2) {
+//       ListNode newL1 = reverseList(l1, null);
+//       ListNode newL2 = reverseList(l2, null);
+//       long answer = nodeToNumber(newL1) + nodeToNumber(newL2);
+//       ArrayList<ListNode> newList = numberToListNode(answer);
+//       ListNode newHead = reverseList(newList.get(0), null);
+//       return newHead;
+//
+//    }
+//
+//    public static ListNode reverseList(ListNode head, ListNode prev ) {
+//        if (head == null) { return prev; }
+//        ListNode next = head.next;
+//        head.next = prev;
+//        return reverseList(next, head);
+//
+//    }
+//    public static long nodeToNumber(ListNode head) {
+//        String numbers = "";
+//        while (head != null) {
+//            numbers += Integer.toString(head.val);
+//            head = head.next;
+//        }
+//        long number = Long.parseLong(numbers);
+//        return number;
+//    }
+//
+//    public static ArrayList<ListNode> numberToListNode(long number) {
+//        String num = Long.toString(number);
+//        ArrayList<ListNode> listOfNodes = new ArrayList<>();
+//        for (int i = 0; i < num.length(); i++){
+//            ListNode node = new ListNode(num.charAt(i)-'0');
+//            listOfNodes.add(node);
+//        }
+//        for (int i = 0; i < listOfNodes.size(); i++){
+//            if (i == listOfNodes.size()-1) {
+//                listOfNodes.get(i).next = null;
+//                break;
+//            }
+//            listOfNodes.get(i).next=listOfNodes.get(i+1);
+//        }
+//        return listOfNodes;
+//    }
 
 //    public static ListNode numberToListNode(String numberString){
 //
@@ -89,20 +120,20 @@ public class Main {
 
 
     //Definition for singly-linked list.0
-    static class ListNode {
-          int val;
-          ListNode next;
-          ListNode() {}
-          ListNode(int val) { this.val = val; }
-          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-      }
+//    static class ListNode {
+//          int val;
+//          ListNode next;
+//          ListNode() {}
+//          ListNode(int val) { this.val = val; }
+//          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+//      }
 
 //    static class Solution {
 //        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 //
 //        }
 //    }
-}
+
 
 //    public static int romanToInt(String s) {
 //        HashMap<Character, Integer> letterNumMap = new HashMap<Character, Integer>();
